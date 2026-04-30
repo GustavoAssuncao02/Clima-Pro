@@ -1,4 +1,5 @@
 {
+  "homepage": "https://gustavoassuncao02.github.io/Clima-Pro",
   "name": "climapro-react",
   "version": "1.0.0",
   "private": true,
@@ -6,18 +7,21 @@
   "scripts": {
     "dev": "vite",
     "build": "vite build",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d dist"
   },
   "dependencies": {
     "@vitejs/plugin-react": "4.3.4",
-    "vite": "5.4.11",
+    "lucide-react": "0.468.0",
     "react": "18.3.1",
     "react-dom": "18.3.1",
-    "lucide-react": "0.468.0"
+    "vite": "5.4.11"
   },
   "devDependencies": {
-    "tailwindcss": "3.4.17",
+    "autoprefixer": "10.4.20",
+    "gh-pages": "^6.3.0",
     "postcss": "8.4.49",
-    "autoprefixer": "10.4.20"
+    "tailwindcss": "3.4.17"
   }
 }
