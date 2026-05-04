@@ -477,7 +477,6 @@ const Hero = () => (
           { num: '+500', label: 'Clientes atendidos' },
           { num: '12',   label: 'Anos de experiência' },
           { num: '4.9★', label: 'Nota média no Google' },
-          { num: '24h',  label: 'Atendimento emergencial' },
         ].map((s, i) => (
           <div key={i} style={{ padding: '8px 0' }}>
             <div className="stat-num">{s.num}</div>
@@ -500,10 +499,10 @@ const Features = () => {
   const items = [
     { icon: Thermometer, title: 'Economize até 70%', desc: 'Manutenção regular garante que seu aparelho opere na eficiência máxima, reduzindo drasticamente o consumo de energia.' },
     { icon: Wind,         title: 'Ar 100% Saudável',  desc: 'Filtros limpos eliminam fungos, bactérias e alérgenos. Sua família respira um ar puro e de qualidade.' },
-    { icon: Wrench,       title: 'Técnicos Certificados', desc: 'Nossa equipe é treinada pelas maiores fabricantes do mercado. Atendimento rápido, limpo e sem surpresas.' },
+    { icon: Wrench,       title: 'Técnicos Certificados', desc: 'Nossa equipe é treinada e capacitada. Atendimento rápido, limpo e sem surpresas.' },
     { icon: ShieldCheck,  title: 'Garantia Total',    desc: 'Todo serviço tem garantia de mão de obra e peças. Você não paga novamente pelo mesmo problema.' },
-    { icon: Clock,        title: 'Resposta Rápida',   desc: 'Agendamento em horas, não dias. Atendimento de emergência disponível 24 horas por dia.' },
-    { icon: Award,        title: 'PMOC Incluso',      desc: 'Para ambientes comerciais, emitimos o Plano de Manutenção Operação e Controle exigido pela ANVISA.' },
+    { icon: Clock,        title: 'Resposta Rápida',   desc: 'Agendamento em horas, não dias.' },
+    { icon: Award,        title: 'PMOC Incluso',      desc: 'Para ambientes comerciais, emitimos o Plano de Manutenção Operação e Controle. ' },
   ];
 
   return (
@@ -546,10 +545,10 @@ const Features = () => {
 /* ─── COMO FUNCIONA ─────────────────────────────────────────── */
 const HowItWorks = () => {
   const steps = [
-    { num: '01', icon: <MessageCircle size={26} />, title: 'Fale Conosco', desc: 'Entre em contato pelo WhatsApp. Em minutos você tem um atendimento personalizado.' },
+    { num: '01', icon: <MessageCircle size={26} />, title: 'Fale Conosco', desc: 'Entre em contato pelo WhatsApp. Em minutos você tem um atendimento.' },
     { num: '02', icon: <Search size={26} />,        title: 'Diagnóstico',  desc: 'Nosso técnico faz uma vistoria completa e apresenta o orçamento sem compromisso.' },
     { num: '03', icon: <Settings size={26} />,      title: 'Execução',     desc: 'Serviço realizado com equipamentos modernos, sem sujeira e no prazo combinado.' },
-    { num: '04', icon: <BadgeCheck size={26} />,    title: 'Garantia',     desc: 'Você recebe laudo técnico, nota fiscal e garantia total no serviço prestado.' },
+    { num: '04', icon: <BadgeCheck size={26} />,    title: 'Garantia',     desc: 'Fornecemos garantia do serviço prestado para sua tranquilidade.' },
   ];
 
   return (
@@ -717,7 +716,7 @@ const Clients = () => {
   const clients = [
     { icon: Building2,   name: 'Real Calçados',  desc: 'Instalação e manutenção de aparelhos de até 40.000 BTUs em múltiplas lojas.' },
     { icon: ShoppingBag, name: 'Biohit Club',     desc: 'Manutenção preventiva em toda a rede de academias, garantindo conforto no treino.' },
-    { icon: HeartPulse,  name: 'Clínica Vitta',   desc: 'Climatização de salas de atendimento conforme normas da ANVISA com PMOC.' },
+    { icon: HeartPulse,  name: 'Hapivida',        desc: 'Climatização de ambientes de saúde com PMOC, foco no conforto de pacientes, equipes e visitantes.' },
   ];
 
   return (
@@ -760,7 +759,7 @@ const Clients = () => {
 const Testimonials = () => {
   const list = [
     { name: 'Carlos Mendes',   role: 'Proprietário, Real Calçados', rating: 5, text: 'A ClimaPro atende nossas lojas há 3 anos. Nunca tivemos um aparelho parado por mais de 24 horas. Profissionalismo e qualidade em cada visita.' },
-    { name: 'Dra. Fernanda Lima', role: 'Diretora, Clínica Vitta',    rating: 5, text: 'Para uma clínica médica, a temperatura ambiente é fundamental. A equipe entende isso e sempre entrega o PMOC no prazo. Recomendo de olhos fechados.' },
+    { name: 'Dra. Fernanda Lima', role: 'Coordenadora, Hapivida',     rating: 5, text: 'Em uma operação de saúde, manter a climatização em dia faz diferença para pacientes e equipes. A ClimaPro acompanha tudo com cuidado e entrega o PMOC no prazo.' },
     { name: 'Rafael Sousa',    role: 'Gerente, Biohit Club',         rating: 5, text: 'Atendimento rápido e preço justo. Quando o ar parou num sábado, a ClimaPro estava aqui em menos de 2 horas. Isso é parceria de verdade.' },
   ];
 
@@ -837,12 +836,11 @@ const FAQItem = ({ question, answer }) => {
 
 const FAQ = () => {
   const items = [
-    { q: 'Vocês vendem aparelhos ou apenas fazem manutenção?',         a: 'Realizamos instalação, manutenção corretiva e preventiva em aparelhos de ar-condicionado de até 60.000 BTUs. Atendemos clientes em todo o Nordeste com equipe própria.' },
+    { q: 'Vocês vendem aparelhos ou apenas fazem manutenção?',         a: 'Realizamos instalação, manutenção corretiva e preventiva em aparelhos de ar-condicionado de até 60.000 BTUs. Também vendemos ar-condicionados seminovos revisados, com orientação para escolher o modelo ideal para o seu ambiente.' },
     { q: 'Qual a diferença entre Split comum e Inverter?',             a: 'O Inverter possui compressor de velocidade variável. Ele ajusta a potência sem desligar, economizando até 70% na conta de luz e garantindo temperatura mais estável.' },
     { q: 'Quanto tempo leva uma instalação residencial?',              a: 'Em média de 2 a 4 horas para instalação padrão. Trabalhamos com equipamentos modernos que evitam sujeira e danos na parede.' },
-    { q: 'Com que frequência devo fazer manutenção preventiva?',       a: 'Para residências, recomendamos limpeza dos filtros mensalmente e manutenção técnica a cada 6 meses. Para comércio e clínicas, a legislação exige o PMOC com frequência maior.' },
-    { q: 'Vocês emitem nota fiscal e laudo técnico?',                  a: 'Sim! Todo serviço inclui nota fiscal, laudo técnico com diagnóstico completo e termo de garantia. Para ambientes comerciais, também emitimos ART quando necessário.' },
-    { q: 'Vocês atendem aos fins de semana e feriados?',               a: 'Sim. Temos equipe de plantão 24 horas para emergências. Atendimentos programados também podem ser agendados fora do horário comercial mediante consulta.' },
+    { q: 'Com que frequência devo fazer manutenção preventiva?',       a: 'Para residências, recomendamos limpeza dos filtros mensalmente e manutenção técnica a cada 5 meses. Para comércio e clínicas, a legislação exige o PMOC com frequência maior.' },
+    { q: 'Vocês atendem aos fins de semana e feriados?',               a: 'Sim. Atendimentos programados também podem ser agendados fora do horário comercial mediante consulta.' },
   ];
 
   return (
@@ -928,7 +926,7 @@ const Footer = () => (
           </div>
           <p style={{ color: '#8da4c0', lineHeight: 1.7, maxWidth: 320, fontSize: '0.9rem', marginBottom: 24 }}>
             Especialistas em instalação e manutenção de ar-condicionado.
-            Atendimento profissional em todo o Nordeste há mais de 12 anos.
+            Atendimento profissional em todo o Nordeste há mais de 10 anos.
           </p>
           <div style={{ display: 'flex', alignItems: 'center', gap: 6 }}>
             {[1,2,3,4,5].map(i => <Star key={i} size={14} className="star-filled" />)}
@@ -965,9 +963,7 @@ const Footer = () => (
             <li style={{ display: 'flex', alignItems: 'center', gap: 10, color: '#8da4c0', fontSize: '0.875rem' }}>
               <MapPin size={15} style={{ color: '#00c8ff', flexShrink: 0 }} /> Nordeste do Brasil
             </li>
-            <li style={{ display: 'flex', alignItems: 'center', gap: 10, color: '#8da4c0', fontSize: '0.875rem' }}>
-              <Clock size={15} style={{ color: '#00c8ff', flexShrink: 0 }} /> 24h / 7 dias
-            </li>
+            
           </ul>
           <a href={WHATSAPP_MSG} target="_blank" rel="noopener noreferrer" className="btn-shine" style={{
             display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 7,
