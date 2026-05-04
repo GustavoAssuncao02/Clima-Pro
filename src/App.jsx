@@ -393,7 +393,7 @@ const EmergencyBanner = () => (
     flexWrap: 'wrap',
   }}>
     {[
-      { icon: <Clock size={13} />, text: 'Atendimento 24 horas' },
+      { icon: <Clock size={13} />, text: 'Atendimento agendado' },
       { icon: <MapPin size={13} />, text: 'Todo o Nordeste' },
       { icon: <Award size={13} />, text: 'Técnicos Certificados' },
       { icon: <Zap size={13} />, text: 'Resposta em até 2h' },
@@ -953,7 +953,7 @@ const Clients = () => {
 /* ─── DEPOIMENTOS ───────────────────────────────────────────── */
 const Testimonials = () => {
   const list = [
-    { name: 'Carlos Mendes',   role: 'Proprietário, Real Calçados', rating: 5, text: 'A ClimaPro atende nossas lojas há 3 anos. Nunca tivemos um aparelho parado por mais de 24 horas. Profissionalismo e qualidade em cada visita.' },
+    { name: 'Carlos Mendes',   role: 'Proprietário, Real Calçados', rating: 5, text: 'A ClimaPro atende nossas lojas há 3 anos. Nunca tivemos um aparelho parado por longos períodos. Profissionalismo e qualidade em cada visita.' },
     { name: 'Dra. Fernanda Lima', role: 'Coordenadora, Hapivida',     rating: 5, text: 'Em uma operação de saúde, manter a climatização em dia faz diferença para pacientes e equipes. A ClimaPro acompanha tudo com cuidado e entrega o PMOC no prazo.' },
     { name: 'Rafael Sousa',    role: 'Gerente, Biohit Club',         rating: 5, text: 'Atendimento rápido e preço justo. Quando o ar parou num sábado, a ClimaPro estava aqui em menos de 2 horas. Isso é parceria de verdade.' },
   ];
