@@ -169,6 +169,93 @@ const FontLoader = () => (
 
     /* Star fill */
     .star-filled { fill: #fbbf24; color: #fbbf24; }
+
+    .mobile-carousel-controls { display: none; }
+
+    .mobile-carousel-arrow {
+      width: 38px;
+      height: 38px;
+      border-radius: 50%;
+      border: 1px solid rgba(0,200,255,0.24);
+      background: rgba(0,200,255,0.08);
+      color: var(--ice);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: background 0.2s ease, border-color 0.2s ease, transform 0.2s ease;
+    }
+
+    .mobile-carousel-arrow:active { transform: scale(0.96); }
+
+    .mobile-carousel-dots {
+      display: flex;
+      align-items: center;
+      gap: 7px;
+    }
+
+    .mobile-carousel-dot {
+      width: 8px;
+      height: 8px;
+      border: 0;
+      border-radius: 999px;
+      padding: 0;
+      background: rgba(141,164,192,0.35);
+      cursor: pointer;
+      transition: width 0.2s ease, background 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .mobile-carousel-dot.is-active {
+      width: 24px;
+      background: var(--ice);
+      box-shadow: 0 0 12px rgba(0,200,255,0.45);
+    }
+
+    @media (max-width: 768px) {
+      .mobile-carousel-window {
+        overflow: hidden;
+        margin: 0 -28px;
+        padding: 0 28px;
+      }
+
+      .mobile-carousel-track {
+        display: flex !important;
+        grid-template-columns: none !important;
+        gap: 12px !important;
+        align-items: stretch !important;
+        overflow-x: auto;
+        scroll-behavior: smooth;
+        scroll-snap-type: x mandatory;
+        scrollbar-width: none;
+        padding: 4px 0 8px;
+      }
+
+      .mobile-carousel-track::-webkit-scrollbar { display: none; }
+
+      .mobile-carousel-slide {
+        flex: 0 0 88%;
+        min-width: 0;
+        display: flex;
+        scroll-snap-align: start;
+      }
+
+      .mobile-carousel-slide > * {
+        width: 100%;
+        min-height: 100%;
+      }
+
+      .mobile-carousel-controls {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 14px;
+        margin-top: 20px;
+      }
+    }
+
+    @media (max-width: 420px) {
+      .mobile-carousel-slide { flex-basis: 92%; }
+    }
   `}</style>
 );
 
@@ -590,6 +677,97 @@ const HowItWorks = () => {
 };
 
 /* ─── SERVICES ──────────────────────────────────────────────── */
+const MobileCarousel = ({ children, columns, gap = 22, maxWidth, alignItems = 'stretch', ariaLabel = 'itens' }) => {
+  const slides = React.Children.toArray(children);
+  const trackRef = useRef(null);
+  const [activeIndex, setActiveIndex] = useState(0);
+
+  useEffect(() => {
+    setActiveIndex(0);
+  }, [slides.length]);
+
+  const updateActiveSlide = () => {
+    const track = trackRef.current;
+    if (!track) return;
+
+    const closestIndex = Array.from(track.children).reduce((closest, slide, index) => {
+      const currentDistance = Math.abs(slide.offsetLeft - track.scrollLeft);
+      const closestDistance = Math.abs(track.children[closest].offsetLeft - track.scrollLeft);
+      return currentDistance < closestDistance ? index : closest;
+    }, 0);
+
+    setActiveIndex(current => (current === closestIndex ? current : closestIndex));
+  };
+
+  const goToSlide = index => {
+    const nextIndex = (index + slides.length) % slides.length;
+    const slide = trackRef.current?.children[nextIndex];
+
+    setActiveIndex(nextIndex);
+    slide?.scrollIntoView({ behavior: 'smooth', inline: 'start', block: 'nearest' });
+  };
+
+  if (!slides.length) return null;
+
+  return (
+    <div className="mobile-carousel" style={{ maxWidth, margin: maxWidth ? '0 auto' : undefined }}>
+      <div className="mobile-carousel-window">
+        <div
+          ref={trackRef}
+          className="mobile-carousel-track"
+          onScroll={updateActiveSlide}
+          style={{
+            display: 'grid',
+            gridTemplateColumns: columns,
+            gap,
+            alignItems,
+          }}
+        >
+          {slides.map((slide, index) => (
+            <div className="mobile-carousel-slide" key={index}>
+              {slide}
+            </div>
+          ))}
+        </div>
+      </div>
+
+      {slides.length > 1 && (
+        <div className="mobile-carousel-controls" aria-label={`Carrossel de ${ariaLabel}`}>
+          <button
+            type="button"
+            className="mobile-carousel-arrow"
+            aria-label={`Anterior: ${ariaLabel}`}
+            onClick={() => goToSlide(activeIndex - 1)}
+          >
+            <ArrowRight size={16} style={{ transform: 'rotate(180deg)' }} />
+          </button>
+
+          <div className="mobile-carousel-dots">
+            {slides.map((_, index) => (
+              <button
+                key={index}
+                type="button"
+                className={`mobile-carousel-dot${activeIndex === index ? ' is-active' : ''}`}
+                aria-label={`Ir para item ${index + 1} de ${ariaLabel}`}
+                onClick={() => goToSlide(index)}
+              />
+            ))}
+          </div>
+
+          <button
+            type="button"
+            className="mobile-carousel-arrow"
+            aria-label={`Proximo: ${ariaLabel}`}
+            onClick={() => goToSlide(activeIndex + 1)}
+          >
+            <ArrowRight size={16} />
+          </button>
+        </div>
+      )}
+    </div>
+  );
+};
+
 const ServiceCard = ({ title, price, features, isPopular, tag }) => (
   <div style={{
     borderRadius: 24, padding: '32px 28px', position: 'relative',
@@ -666,7 +844,7 @@ const Services = () => (
         </p>
       </div>
 
-      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(290px, 1fr))', gap: 24, alignItems: 'start' }}>
+      <MobileCarousel columns="repeat(auto-fill, minmax(290px, 1fr))" gap={24} alignItems="start" ariaLabel="solucoes completas">
         <ServiceCard
           tag="Residencial"
           title="Manutenção Preventiva"
@@ -706,7 +884,7 @@ const Services = () => (
             'Suporte técnico prioritário',
           ]}
         />
-      </div>
+      </MobileCarousel>
     </div>
   </section>
 );
@@ -734,7 +912,7 @@ const Clients = () => {
           </p>
         </div>
 
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(300px, 1fr))', gap: 22, maxWidth: 1000, margin: '0 auto' }}>
+        <MobileCarousel columns="repeat(auto-fill, minmax(300px, 1fr))" gap={22} maxWidth={1000} ariaLabel="empresas clientes">
           {clients.map(({ icon: Icon, name, desc }, i) => (
             <div key={i} className="glass hover-card" style={{ borderRadius: 22, padding: '30px 26px' }}>
               <div style={{
@@ -749,7 +927,7 @@ const Clients = () => {
               <p style={{ color: '#8da4c0', fontSize: '0.875rem', lineHeight: 1.65 }}>{desc}</p>
             </div>
           ))}
-        </div>
+        </MobileCarousel>
       </div>
     </section>
   );
@@ -775,7 +953,7 @@ const Testimonials = () => {
           </h2>
         </div>
 
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(300px, 1fr))', gap: 22 }}>
+        <MobileCarousel columns="repeat(auto-fill, minmax(300px, 1fr))" gap={22} ariaLabel="depoimentos">
           {list.map((t, i) => (
             <div key={i} className="glass hover-card" style={{ borderRadius: 22, padding: '30px 26px' }}>
               <div style={{ display: 'flex', gap: 4, marginBottom: 16 }}>
@@ -791,7 +969,7 @@ const Testimonials = () => {
               </div>
             </div>
           ))}
-        </div>
+        </MobileCarousel>
       </div>
     </section>
   );
