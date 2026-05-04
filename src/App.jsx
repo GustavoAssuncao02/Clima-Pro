@@ -172,6 +172,16 @@ const FontLoader = () => (
 
     .mobile-carousel-controls { display: none; }
 
+    .mobile-carousel-slide {
+      min-width: 0;
+      display: flex;
+    }
+
+    .mobile-carousel-slide > * {
+      width: 100%;
+      height: 100%;
+    }
+
     .mobile-carousel-arrow {
       width: 38px;
       height: 38px;
@@ -921,7 +931,7 @@ const Clients = () => {
 
         <MobileCarousel columns="repeat(auto-fill, minmax(300px, 1fr))" gap={22} maxWidth={1000} ariaLabel="empresas clientes">
           {clients.map(({ icon: Icon, name, desc }, i) => (
-            <div key={i} className="glass hover-card" style={{ borderRadius: 22, padding: '30px 26px' }}>
+            <div key={i} className="glass hover-card" style={{ borderRadius: 22, padding: '30px 26px', display: 'flex', flexDirection: 'column' }}>
               <div style={{
                 width: 56, height: 56, borderRadius: 16,
                 background: 'linear-gradient(135deg, #00c8ff, #0066dd)',
@@ -969,7 +979,7 @@ const Testimonials = () => {
               <p style={{ color: '#c8d8e8', fontSize: '0.9rem', lineHeight: 1.7, marginBottom: 22, fontStyle: 'italic' }}>
                 "{t.text}"
               </p>
-              <div style={{ height: 1, background: 'rgba(0,200,255,0.1)', marginBottom: 18 }} />
+              <div style={{ height: 1, background: 'rgba(0,200,255,0.1)', marginTop: 'auto', marginBottom: 18 }} />
               <div>
                 <p className="font-display" style={{ color: '#fff', fontWeight: 700, fontSize: '0.95rem' }}>{t.name}</p>
                 <p style={{ color: '#8da4c0', fontSize: '0.8rem', marginTop: 3 }}>{t.role}</p>
