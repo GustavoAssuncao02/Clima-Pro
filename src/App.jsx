@@ -269,8 +269,8 @@ const FontLoader = () => (
   `}</style>
 );
 
-const WHATSAPP_LINK = 'https://wa.me/557591125119';
-const WHATSAPP_MSG  = 'https://wa.me/557591125119?text=Olá!%20Gostaria%20de%20solicitar%20um%20orçamento.';
+const WHATSAPP_LINK = 'https://wa.me/5575992551314';
+const WHATSAPP_MSG  = 'https://wa.me/5575992551314?text=Olá!%20Gostaria%20de%20solicitar%20um%20orçamento.';
 
 /* ─── NAVBAR ───────────────────────────────────────────────── */
 const Navbar = () => {
@@ -624,7 +624,7 @@ const Features = () => {
           </p>
         </div>
 
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(300px, 1fr))', gap: 20 }}>
+        <MobileCarousel columns="repeat(auto-fill, minmax(300px, 1fr))" gap={20} ariaLabel="beneficios">
           {items.map(({ icon: Icon, title, desc }, i) => (
             <div key={i} className="glass hover-card" style={{ borderRadius: 20, padding: '28px 26px' }}>
               <div style={{
@@ -640,7 +640,7 @@ const Features = () => {
               <p style={{ color: '#8da4c0', lineHeight: 1.65, fontSize: '0.9rem' }}>{desc}</p>
             </div>
           ))}
-        </div>
+        </MobileCarousel>
       </div>
     </section>
   );
@@ -670,7 +670,7 @@ const HowItWorks = () => {
           </p>
         </div>
 
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(240px, 1fr))', gap: 24 }}>
+        <MobileCarousel columns="repeat(auto-fill, minmax(240px, 1fr))" gap={24} ariaLabel="como funciona">
           {steps.map((s, i) => (
             <div key={i} className="glass hover-card" style={{ borderRadius: 22, padding: '32px 24px', textAlign: 'center', position: 'relative' }}>
               <div style={{
@@ -687,7 +687,7 @@ const HowItWorks = () => {
               <p style={{ color: '#8da4c0', fontSize: '0.875rem', lineHeight: 1.65 }}>{s.desc}</p>
             </div>
           ))}
-        </div>
+        </MobileCarousel>
       </div>
     </section>
   );
@@ -1153,7 +1153,7 @@ const Footer = () => (
           <h4 className="font-display" style={{ color: '#fff', fontWeight: 700, fontSize: '0.95rem', marginBottom: 20, letterSpacing: '0.02em' }}>Contato</h4>
           <ul style={{ listStyle: 'none', padding: 0, display: 'flex', flexDirection: 'column', gap: 14 }}>
             <li style={{ display: 'flex', alignItems: 'center', gap: 10, color: '#8da4c0', fontSize: '0.875rem' }}>
-              <Phone size={15} style={{ color: '#00c8ff', flexShrink: 0 }} /> (75) 9 1125-119
+              <Phone size={15} style={{ color: '#00c8ff', flexShrink: 0 }} /> (75) 9 9255-1314
             </li>
             <li style={{ display: 'flex', alignItems: 'center', gap: 10, color: '#8da4c0', fontSize: '0.875rem' }}>
               <MapPin size={15} style={{ color: '#00c8ff', flexShrink: 0 }} /> Nordeste do Brasil
