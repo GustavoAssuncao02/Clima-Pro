@@ -284,7 +284,7 @@ const Navbar = () => {
 
   return (
     <nav style={{
-      position: 'fixed', top: 0, left: 0, right: 0, zIndex: 1000,
+      position: 'sticky', top: 0, left: 0, right: 0, zIndex: 1000,
       transition: 'all 0.3s ease',
       background: scrolled ? 'rgba(5,14,34,0.92)' : 'transparent',
       backdropFilter: scrolled ? 'blur(16px)' : 'none',
@@ -398,7 +398,7 @@ const EmergencyBanner = () => (
 
 /* ─── HERO ──────────────────────────────────────────────────── */
 const Hero = () => (
-  <section style={{ paddingTop: 140, paddingBottom: 0, position: 'relative', overflow: 'hidden' }} className="ice-grid">
+  <section style={{ paddingTop: 72, paddingBottom: 0, position: 'relative', overflow: 'hidden' }} className="ice-grid">
     {/* Background orbs */}
     <div style={{
       position: 'absolute', top: -120, right: -80, width: 500, height: 500,
@@ -559,13 +559,13 @@ const Hero = () => (
 
     {/* Stats bar */}
     <div style={{ marginTop: 80, background: 'rgba(9,20,40,0.8)', borderTop: '1px solid rgba(0,200,255,0.1)', borderBottom: '1px solid rgba(0,200,255,0.1)' }}>
-      <div style={{ maxWidth: 1280, margin: '0 auto', padding: '32px 28px', display: 'grid', gridTemplateColumns: 'repeat(4,1fr)', gap: 16, textAlign: 'center' }}>
+      <div className="stats-grid" style={{ maxWidth: 1280, margin: '0 auto', padding: '32px 28px', display: 'grid', gridTemplateColumns: 'repeat(3, minmax(0, 1fr))', gap: 16, alignItems: 'center', textAlign: 'center' }}>
         {[
           { num: '+500', label: 'Clientes atendidos' },
           { num: '12',   label: 'Anos de experiência' },
           { num: '4.9★', label: 'Nota média no Google' },
         ].map((s, i) => (
-          <div key={i} style={{ padding: '8px 0' }}>
+          <div key={i} style={{ width: '100%', minWidth: 0, padding: '8px 0' }}>
             <div className="stat-num">{s.num}</div>
             <p style={{ color: '#8da4c0', fontSize: '0.82rem', marginTop: 4 }}>{s.label}</p>
           </div>
@@ -576,6 +576,13 @@ const Hero = () => (
     <style>{`
       @media (max-width: 900px) {
         .hero-visual { display: none; }
+      }
+
+      @media (max-width: 560px) {
+        .stats-grid {
+          grid-template-columns: 1fr !important;
+          gap: 18px !important;
+        }
       }
     `}</style>
   </section>
