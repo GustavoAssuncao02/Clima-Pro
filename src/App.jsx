@@ -960,7 +960,7 @@ const Testimonials = () => {
           </h2>
         </div>
 
-        <MobileCarousel columns="repeat(auto-fill, minmax(300px, 1fr))" gap={22} ariaLabel="depoimentos">
+        <MobileCarousel columns="repeat(auto-fill, minmax(300px, 1fr))" gap={22} maxWidth={1000} ariaLabel="depoimentos">
           {list.map((t, i) => (
             <div key={i} className="glass hover-card" style={{ borderRadius: 22, padding: '30px 26px' }}>
               <div style={{ display: 'flex', gap: 4, marginBottom: 16 }}>
