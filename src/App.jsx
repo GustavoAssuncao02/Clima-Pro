@@ -877,7 +877,7 @@ const Services = () => (
         <ServiceCard
           tag="Residencial / Comercial"
           title="Instalação Profissional"
-          price="R$ 450"
+          price="R$ 500"
           isPopular={true}
           features={[
             'Aparelhos até 36.000 BTUs',
