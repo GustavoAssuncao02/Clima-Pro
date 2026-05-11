@@ -141,6 +141,109 @@ const FontLoader = () => (
     }
     .wa-float { animation: waBounce 3s ease-in-out infinite; }
 
+    /* Cold wind entrance */
+    @keyframes coldWindLift {
+      0%   { opacity: 0; transform: translateY(28px); }
+      16%  { opacity: 1; transform: translateY(0); }
+      80%  { opacity: 0.72; transform: translateY(-8px); }
+      100% { opacity: 0; transform: translateY(-22px); }
+    }
+
+    @keyframes coldWindLayer {
+      0%   { opacity: 0; transform: translateX(-115%) skewX(-10deg); }
+      20%  { opacity: 0.62; }
+      78%  { opacity: 0.42; }
+      100% { opacity: 0; transform: translateX(118%) skewX(-10deg); }
+    }
+
+    @keyframes coldWindLine {
+      0% {
+        opacity: 0;
+        stroke-dashoffset: 1040;
+        transform: translateY(14px);
+      }
+      16%  { opacity: 0.74; }
+      72%  { opacity: 0.5; }
+      100% {
+        opacity: 0;
+        stroke-dashoffset: -920;
+        transform: translateY(var(--lift, -16px));
+      }
+    }
+
+    .cold-wind-intro {
+      position: fixed;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      height: clamp(110px, 18vh, 170px);
+      overflow: hidden;
+      pointer-events: none;
+      z-index: 9998;
+      mix-blend-mode: screen;
+      animation: coldWindLift 6.8s ease-out 0.15s both;
+    }
+
+    .cold-wind-intro::before,
+    .cold-wind-intro::after {
+      content: '';
+      position: absolute;
+      left: -35vw;
+      border-radius: 999px;
+      pointer-events: none;
+    }
+
+    .cold-wind-intro::before {
+      bottom: 24px;
+      width: 86vw;
+      height: 50px;
+      background:
+        radial-gradient(ellipse at 12% 50%, rgba(210,248,255,0.42), transparent 46%),
+        linear-gradient(90deg, transparent, rgba(132,230,255,0.34), rgba(240,252,255,0.3), transparent);
+      filter: blur(16px);
+      animation: coldWindLayer 6.6s cubic-bezier(0.16, 0.84, 0.34, 1) 0.1s both;
+    }
+
+    .cold-wind-intro::after {
+      bottom: 4px;
+      width: 108vw;
+      height: 34px;
+      background: linear-gradient(90deg, transparent, rgba(0,200,255,0.24), rgba(236,252,255,0.28), transparent);
+      filter: blur(12px);
+      animation: coldWindLayer 5.8s cubic-bezier(0.16, 0.84, 0.34, 1) 0.45s both;
+    }
+
+    .cold-wind-waves {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+    }
+
+    .cold-wind-line {
+      fill: none;
+      stroke: url(#coldWindStroke);
+      stroke-width: var(--stroke, 3);
+      stroke-linecap: round;
+      stroke-dasharray: var(--dash, 360) 920;
+      stroke-dashoffset: 1040;
+      opacity: 0;
+      filter: url(#coldWindGlow);
+      transform-box: fill-box;
+      transform-origin: center;
+      animation: coldWindLine var(--duration, 6s) cubic-bezier(0.16, 0.84, 0.34, 1) var(--delay, 0s) both;
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .cold-wind-intro,
+      .cold-wind-intro::before,
+      .cold-wind-intro::after,
+      .cold-wind-line {
+        animation: none !important;
+        opacity: 0 !important;
+      }
+    }
+
     /* Hover card effect */
     .hover-card {
       transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
@@ -1207,6 +1310,80 @@ const FloatWhatsApp = () => (
 );
 
 /* ─── APP ───────────────────────────────────────────────────── */
+const ColdWindIntro = () => {
+  const waves = [
+    {
+      d: 'M-120 34 C 40 4, 135 66, 290 36 S 540 16, 690 46 S 940 72, 1090 36 S 1290 18, 1360 44',
+      delay: '0.15s',
+      duration: '6.4s',
+      lift: '-18px',
+      stroke: 2.3,
+      dash: 330,
+    },
+    {
+      d: 'M-150 58 C 25 92, 165 24, 320 58 S 565 96, 710 54 S 960 18, 1120 56 S 1280 92, 1370 56',
+      delay: '0.45s',
+      duration: '7s',
+      lift: '-24px',
+      stroke: 3.2,
+      dash: 390,
+    },
+    {
+      d: 'M-130 84 C 55 50, 185 114, 350 82 S 585 46, 735 84 S 980 122, 1135 82 S 1300 48, 1380 80',
+      delay: '0s',
+      duration: '6.7s',
+      lift: '-16px',
+      stroke: 2.7,
+      dash: 360,
+    },
+    {
+      d: 'M-160 112 C 15 134, 165 86, 315 112 S 555 144, 705 110 S 955 76, 1115 108 S 1285 142, 1385 108',
+      delay: '0.7s',
+      duration: '7.3s',
+      lift: '-20px',
+      stroke: 2.2,
+      dash: 340,
+    },
+  ];
+
+  return (
+    <div className="cold-wind-intro" aria-hidden="true">
+      <svg className="cold-wind-waves" viewBox="0 0 1200 150" preserveAspectRatio="none" focusable="false">
+        <defs>
+          <linearGradient id="coldWindStroke" x1="0%" y1="0%" x2="100%" y2="0%">
+            <stop offset="0%" stopColor="#d8f8ff" stopOpacity="0" />
+            <stop offset="22%" stopColor="#d8f8ff" stopOpacity="0.86" />
+            <stop offset="52%" stopColor="#38e8ff" stopOpacity="0.62" />
+            <stop offset="82%" stopColor="#f0fcff" stopOpacity="0.5" />
+            <stop offset="100%" stopColor="#f0fcff" stopOpacity="0" />
+          </linearGradient>
+          <filter id="coldWindGlow" x="-20%" y="-140%" width="140%" height="380%">
+            <feGaussianBlur stdDeviation="2.8" result="blur" />
+            <feMerge>
+              <feMergeNode in="blur" />
+              <feMergeNode in="SourceGraphic" />
+            </feMerge>
+          </filter>
+        </defs>
+        {waves.map((wave, index) => (
+          <path
+            key={index}
+            className="cold-wind-line"
+            d={wave.d}
+            style={{
+              '--delay': wave.delay,
+              '--duration': wave.duration,
+              '--lift': wave.lift,
+              '--stroke': `${wave.stroke}`,
+              '--dash': `${wave.dash}`,
+            }}
+          />
+        ))}
+      </svg>
+    </div>
+  );
+};
+
 export default function App() {
   return (
     <>
@@ -1226,6 +1403,7 @@ export default function App() {
         </main>
         <Footer />
         <FloatWhatsApp />
+        <ColdWindIntro />
       </div>
     </>
   );
