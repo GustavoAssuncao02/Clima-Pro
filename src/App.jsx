@@ -1278,7 +1278,7 @@ const Footer = () => (
 
       <div className="ice-line" style={{ marginBottom: 28 }} />
       <p style={{ color: '#4d6480', fontSize: '0.82rem', textAlign: 'center' }}>
-        © {new Date().getFullYear()} ClimaPro Climatização. Todos os direitos reservados.
+        Copyright © {new Date().getFullYear()} ClimaPro Climatização. Todos os direitos reservados.
       </p>
     </div>
 
@@ -1385,6 +1385,13 @@ const ColdWindIntro = () => {
 };
 
 export default function App() {
+  useEffect(() => {
+    const blockRightClick = (event) => event.preventDefault();
+
+    document.addEventListener('contextmenu', blockRightClick);
+    return () => document.removeEventListener('contextmenu', blockRightClick);
+  }, []);
+
   return (
     <>
       <FontLoader />
